@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kleidung kaufen – Szenen</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#f8f5ee;--bg2:#e9eef7;--card:#fff;--tx:#1f2430;--mut:#7a8194;--ac:#e0463c;--s1:#d6ecff;--s2:#fff3d6;--fl:#dccdab;--sh:0 18px 50px #2a3a6026}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#14151a;--bg2:#1b1e29;--card:#232634;--tx:#eef0f6;--mut:#9aa1b5;--s1:#27425e;--s2:#4b3f25;--fl:#5a4b30;--sh:0 18px 50px #0008}}
+:root[data-theme="dark"]{--bg1:#14151a;--bg2:#1b1e29;--card:#232634;--tx:#eef0f6;--mut:#9aa1b5;--s1:#27425e;--s2:#4b3f25;--fl:#5a4b30;--sh:0 18px 50px #0008}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--tx);background:linear-gradient(160deg,var(--bg1),var(--bg2));font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+section{height:100svh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:12px 16px}
+.hero{text-align:center}.hero h1{font-size:clamp(2.2rem,7vw,4.2rem);margin:0;letter-spacing:-.02em}
+.hero p{color:var(--mut);margin:6px 0;font-size:1.05rem}.hero .dn{font-size:2.4rem;color:var(--ac);animation:bob 1.4s infinite}
+@keyframes bob{50%{transform:translateY(10px)}}
+.no{font-size:.85rem;font-weight:700;color:var(--mut);letter-spacing:.15em}
+.stage{width:min(920px,100%,calc((100svh - 250px)*1.6));border-radius:26px;overflow:hidden;box-shadow:var(--sh);background:var(--card)}
+.st{aspect-ratio:8/5;background:linear-gradient(var(--s1),var(--s2))}.st svg{width:100%;height:100%;display:block}
+.ctl{display:flex;align-items:center;gap:10px;width:min(920px,100%,calc((100svh - 250px)*1.6))}
+.b{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--card);color:var(--tx);font-size:20px;font-weight:700;box-shadow:0 3px 10px #0002;cursor:pointer}
+.b.play{background:var(--ac);color:#fff;width:52px;height:52px}.b:active{transform:scale(.93)}
+.seg{flex:1;display:flex;gap:6px}.seg i{flex:1;padding:12px 0;cursor:pointer}
+.seg u{display:block;height:8px;border-radius:4px;background:linear-gradient(var(--ac),var(--ac)) left/0% 100% no-repeat,#8885}
+.seg i.d u{background-size:100% 100%}.seg i.on u{animation:fill 3.2s linear forwards}
+@keyframes fill{to{background-size:100% 100%}}
+h2{margin:0;text-align:center;font-size:clamp(1.3rem,3.6vw,2.2rem);max-width:900px;line-height:1.25}
+.paused *{animation-play-state:paused!important}
+#nav{position:fixed;right:10px;top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:9px;z-index:5}
+#nav a{width:10px;height:10px;border-radius:50%;background:#8886;transition:.2s}#nav a.on{background:var(--ac);transform:scale(1.5)}
+@media(max-width:560px){#nav{display:none}}
+svg *{transform-box:fill-box}
+.pop{animation:pop .45s both;transform-origin:center}
+.hop{animation:hop .8s infinite}.tw{animation:tw 1s infinite alternate;transform-origin:center}
+.L{animation:L .9s both}.R{animation:R .9s both}
+.pay{animation:pay 1.4s .3s both}.scan{animation:scan 2s .2s both}
+.big{animation:big 1.6s .3s both}.short{animation:short 1.6s .3s both}.strain{animation:strain .7s infinite alternate}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes hop{50%{transform:translateY(-9px)}}
+@keyframes tw{from{transform:scale(.6)}to{transform:scale(1.25)}}
+@keyframes L{from{transform:translateX(-260px)}}@keyframes R{from{transform:translateX(260px)}}
+@keyframes pay{to{transform:translateX(140px)}}@keyframes scan{to{transform:translateX(200px)}}
+@keyframes big{to{transform:scale(1.8)}}
+@keyframes short{from{transform:scaleY(1.7)}to{transform:scaleY(.5)}}
+@keyframes strain{to{transform:scaleX(1.2)}}
+</style></head><body>
+<nav id="nav"></nav>
+<section class="hero" id="top"><h1>👗 Kleidung kaufen 🛍️</h1><p>10 Szenen · nach unten scrollen</p><p style="font-size:.95rem">مسافة = إيقاف/تشغيل &nbsp;·&nbsp; ← → = لقطة قبل/بعد</p><div class="dn">↓</div></section>
+<div id="root"></div>
+<script>
+const P=(x,o={})=>{
+ const {top='#3b82f6',bot='#334155',tw=44,tl=56,bw=40,face='smile',arms='down',hair='#4a3020',skin='#f2c9a0',cls='',sk=0,sl=40,long=0,shc='',pc='',star=0}=o;
+ const by=118+tl,h=tw/2,q=bw/4;
+ const hd={down:[[-h-5,172],[h+5,172]],up:[[-h-14,98],[h+14,98]],wave:[[-h-5,172],[h+16,96]],hold:[[-14,152],[14,152]]}[arms];
+ const eyes=face=='love'?`<text x="-7" y="100" font-size="12" fill="#e11d48" text-anchor="middle">♥</text><text x="7" y="100" font-size="12" fill="#e11d48" text-anchor="middle">♥</text>`:`<circle cx="-7" cy="96" r="2.5" fill="#222"/><circle cx="7" cy="96" r="2.5" fill="#222"/>`;
+ const m={smile:'M-8 104 Q0 112 8 104',love:'M-8 104 Q0 114 8 104',sad:'M-7 110 Q0 102 7 110',angry:'M-7 108 L7 108',wow:'M-3 106 a3 4 0 1 0 6 0 a3 4 0 1 0 -6 0'}[face];
+ const br=face=='angry'?'M-13 88 L-3 92 M13 88 L3 92':face=='sad'?'M-13 92 L-3 88 M13 92 L3 88':'';
+ return `<g transform="translate(${x} 0)"><g class="${cls}">
+ ${long?`<path d="M-22 90 v42 h44 v-42z" fill="${hair}"/>`:''}
+ ${sk?`<rect x="-13" y="${by}" width="11" height="${210-by}" fill="${skin}"/><rect x="2" y="${by}" width="11" height="${210-by}" fill="${skin}"/>`:`<g class="${pc}" style="transform-origin:0 ${by}px"><rect x="${-bw/2}" y="${by-4}" width="${bw/2-2}" height="${214-by}" fill="${bot}"/><rect x="2" y="${by-4}" width="${bw/2-2}" height="${214-by}" fill="${bot}"/></g>`}
+ <ellipse cx="${-q-3}" cy="211" rx="11" ry="5" fill="#222"/><ellipse cx="${q+3}" cy="211" rx="11" ry="5" fill="#222"/>
+ ${sk?`<g class="short" style="transform-origin:0 ${by-4}px"><path d="M${-h+2} ${by-4} L${h-2} ${by-4} L${h+14} ${by+sl} L${-h-14} ${by+sl}Z" fill="${bot}"/></g>`:''}
+ <g class="${shc}" style="transform-origin:0 118px"><rect x="${-h}" y="118" width="${tw}" height="${tl}" rx="8" fill="${top}"/>${star?`<path transform="translate(0 ${118+tl/2}) scale(1.6)" d="M0 -9 L2.6 -3 L9 -2.8 L4 1.5 L5.6 8 L0 4.5 L-5.6 8 L-4 1.5 L-9 -2.8 L-2.6 -3Z" fill="#fff"/>`:''}</g>
+ ${hd.map((p,i)=>`<line x1="${i?h-2:-h+2}" y1="126" x2="${p[0]}" y2="${p[1]}" stroke="${top}" stroke-width="9" stroke-linecap="round"/><circle cx="${p[0]}" cy="${p[1]}" r="5.5" fill="${skin}"/>`).join('')}
+ <circle cx="0" cy="97" r="21" fill="${skin}"/><path d="M-22 95 A22 22 0 0 1 22 95 Q10 84 0 84 Q-10 84 -22 95Z" fill="${hair}"/>
+ ${eyes}<path d="${m}" stroke="#222" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="${br}" stroke="#222" stroke-width="2.5" fill="none"/>
+ </g></g>`};
+const W=(x,o)=>P(x,{long:1,top:'#94a3b8',bot:'#64748b',...o});
+const wd=s=>s.length*8.4+24;
+const tag=(t,x,y,f='#fff',c='#222',d=.3)=>`<g class="pop" style="animation-delay:${d}s"><rect x="${x-wd(t)/2}" y="${y-16}" width="${wd(t)}" height="32" rx="11" fill="${f}" stroke="#222" stroke-width="2"/><text x="${x}" y="${y+6}" text-anchor="middle" font-size="16" font-weight="800" fill="${c}">${t}</text></g>`;
+const bub=(t,x,y,tx,d=.3)=>`<g class="pop" style="animation-delay:${d}s"><path d="M${tx-8} ${y+14} L${tx} ${y+34} L${tx+8} ${y+14}Z" fill="#fff" stroke="#222" stroke-width="2.5"/><rect x="${x-wd(t)/2}" y="${y-17}" width="${wd(t)}" height="34" rx="15" fill="#fff" stroke="#222" stroke-width="2.5"/><text x="${x}" y="${y+6}" text-anchor="middle" font-size="16" font-weight="700" fill="#222">${t}</text></g>`;
+const cnt=x=>`<rect x="${x}" y="165" width="110" height="50" rx="4" fill="#8b5e34"/><rect x="${x-4}" y="160" width="118" height="8" rx="3" fill="#a9763f"/>`;
+const scr=(x,t)=>`<rect x="${x+15}" y="116" width="80" height="42" rx="5" fill="#111"/><text x="${x+55}" y="146" fill="#4ade80" font-size="22" font-weight="800" text-anchor="middle">${t}</text>`;
+const money=(x,y,c)=>`<g class="${c}"><rect x="${x}" y="${y}" width="40" height="22" rx="3" fill="#4ade80" stroke="#166534" stroke-width="2"/><text x="${x+20}" y="${y+17}" text-anchor="middle" font-size="15" font-weight="800" fill="#166534">€</text></g>`;
+const card=(x,y,c)=>`<g class="${c}"><rect x="${x}" y="${y}" width="40" height="26" rx="4" fill="#3b82f6"/><rect x="${x}" y="${y+6}" width="40" height="6" fill="#1e3a8a"/></g>`;
+const bag=(x,y,d=.3)=>`<g class="pop" style="animation-delay:${d}s"><path d="M${x-9} ${y} q9 -20 18 0" stroke="#92400e" fill="none" stroke-width="3"/><path d="M${x-16} ${y} h32 l4 38 h-40z" fill="#f59e0b"/></g>`;
+const chk=(x,y,d=.6)=>`<g class="pop" style="animation-delay:${d}s"><circle cx="${x}" cy="${y}" r="22" fill="#22c55e"/><path d="M${x-10} ${y} l7 8 l13 -15" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+const crs=(x,y,d=.6)=>`<g class="pop" style="animation-delay:${d}s"><circle cx="${x}" cy="${y}" r="20" fill="#e0463c"/><path d="M${x-9} ${y-9} l18 18 M${x+9} ${y-9} l-18 18" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>`;
+const st=(x,y,s=1,c='#fde047',d=0)=>`<g transform="translate(${x} ${y}) scale(${s})"><path class="tw" style="animation-delay:${d}s" d="M0 -9 L2.6 -3 L9 -2.8 L4 1.5 L5.6 8 L0 4.5 L-5.6 8 L-4 1.5 L-9 -2.8 L-2.6 -3Z" fill="${c}"/></g>`;
+const ht=(x,y,s=1,d=0)=>`<g transform="translate(${x} ${y}) scale(${s})"><path class="tw" style="animation-delay:${d}s" d="M0 6 C-12 -4 -8 -12 0 -5 C8 -12 12 -4 0 6Z" fill="#ef4444"/></g>`;
+const moon=(x,y)=>`<path class="pop" transform="translate(${x} ${y}) scale(2)" d="M10 -16 A18 18 0 1 0 16 10 A14 14 0 0 1 10 -16Z" fill="#fde047"/>`;
+const shirt=(x,y,c,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-14 0 L-30 10 L-24 24 L-16 20 L-16 54 L16 54 L16 20 L24 24 L30 10 L14 0 Q0 8 -14 0Z" fill="${c}"/></g>`;
+const pants=(x,y,c,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-14 0 H14 L16 56 H4 L0 20 L-4 56 H-16Z" fill="${c}"/></g>`;
+const dress=(x,y,c,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-10 0 L10 0 L12 22 L30 70 L-30 70 L-12 22Z" fill="${c}"/></g>`;
+const wr=x=>`<rect x="${x}" y="70" width="110" height="145" rx="4" fill="#8b5e34"/><rect x="${x+7}" y="77" width="96" height="131" fill="#5b3a1e"/><line x1="${x+7}" y1="92" x2="${x+103}" y2="92" stroke="#ddd" stroke-width="3"/>${shirt(x+28,94,'#ef4444',.9)}${dress(x+58,94,'#ec4899',.7)}${pants(x+88,94,'#1e3a8a',.8)}`;
+const mir=x=>`<ellipse cx="${x}" cy="130" rx="34" ry="58" fill="#cfeaf7" stroke="#8b5e34" stroke-width="6"/>`;
+const shp=x=>`<rect x="${x}" y="70" width="130" height="143" fill="#e5e7eb" stroke="#555" stroke-width="2"/><rect x="${x}" y="44" width="130" height="26" fill="#1f2937"/><text x="${x+65}" y="63" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">SHOP</text>${[0,1,2,3,4,5].map(i=>`<rect x="${x+i*21.6}" y="70" width="21.6" height="22" fill="${i%2?'#fff':'#e0463c'}"/>`).join('')}<rect x="${x+12}" y="110" width="45" height="103" fill="#475569"/><rect x="${x+70}" y="110" width="50" height="45" fill="#bae6fd" stroke="#555" stroke-width="2"/>`;
+const rack=x=>`<line x1="${x}" y1="100" x2="${x+210}" y2="100" stroke="#555" stroke-width="5"/><rect x="${x}" y="100" width="5" height="112" fill="#555"/><rect x="${x+205}" y="100" width="5" height="112" fill="#555"/>${shirt(x+25,102,'#3b82f6',1)}${dress(x+65,102,'#a855f7',.8)}${shirt(x+105,102,'#22c55e',1)}${pants(x+140,102,'#1e3a8a',.9)}${dress(x+180,102,'#f97316',.8)}`;
+const dH=(x1,x2,y,c='#e0463c',d=0)=>`<g class="pop" style="animation-delay:${d}s" stroke="${c}" stroke-width="4" fill="${c}"><line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><path d="M${x1} ${y} l11 -8 v16z"/><path d="M${x2} ${y} l-11 -8 v16z"/></g>`;
+const dV=(x,y1,y2,c='#e0463c',d=0)=>`<g class="pop" style="animation-delay:${d}s" stroke="${c}" stroke-width="4" fill="${c}"><line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}"/><path d="M${x} ${y1} l-8 11 h16z"/><path d="M${x} ${y2} l-8 -11 h16z"/></g>`;
+const lens=(x,y)=>`<g transform="translate(${x} ${y})"><g class="scan"><circle r="24" fill="#ffffff66" stroke="#333" stroke-width="5"/><line x1="17" y1="17" x2="38" y2="38" stroke="#333" stroke-width="7" stroke-linecap="round"/></g></g>`;
+const cash=P(325,{top:'#0ea5e9',bot:'#1e293b'});
+const S=[
+['Das macht 119 Euro, bitte.',[
+ cash+cnt(215)+scr(215,'119 €')+bub('Das macht 119 €, bitte.',215,24,300),
+ cash+cnt(215)+scr(215,'119 €')+P(70,{top:'#a855f7',arms:'hold',cls:'L'})+money(85,150,'pay'),
+ cash+cnt(215)+scr(215,'119 €')+P(70,{top:'#a855f7',arms:'hold'})+bag(70,148)+chk(190,70)]],
+['Ich freue mich auf heute Abend! Hm … Was ziehe ich nur an?!',[
+ W(100,{face:'love',arms:'up'})+moon(250,70)+st(310,50,1.4)+st(340,100,1,'#fde047',.3)+st(215,115,1.1,'#fde047',.6)+tag('heute Abend',270,170),
+ W(80,{face:'sad'})+wr(230)+`<text class="hop" x="80" y="62" font-size="60" font-weight="800" text-anchor="middle" fill="#e0463c">?</text>`,
+ W(90,{face:'wow'})+dress(220,100,'#ec4899',1.2)+shirt(320,96,'#ef4444',1.3)+pants(320,168,'#1e3a8a',.8)+tag('oder',270,150)+`<text class="hop" x="90" y="62" font-size="60" font-weight="800" text-anchor="middle" fill="#e0463c">?</text>`]],
+['Das Hemd und die Hose stehen Ihnen sehr gut!',[
+ P(90,{top:'#9ca3af',bot:'#9ca3af'})+shirt(210,90,'#ef4444',1.6)+tag('das Hemd',210,190)+pants(310,90,'#1e3a8a',1.4)+tag('die Hose',310,190,'#fff','#222',.8),
+ P(100,{top:'#ef4444',bot:'#1e3a8a',face:'love',cls:'hop'})+P(320,{top:'#0ea5e9',bot:'#1e293b',arms:'wave'})+ht(40,70,1.4)+ht(160,60,1.8,.3)+ht(170,120,1.2,.6)+bub('Sehr gut!',240,36,320)]],
+['Das T-Shirt ist doof, zu weit und viel zu lang. Ich muss einkaufen!',[
+ P(120,{top:'#16a34a',face:'angry',shc:'big'})+dH(40,200,150,'#e0463c',1.9)+dV(215,120,212,'#e0463c',2.3)+tag('zu weit',320,150,'#e0463c','#fff',2)+tag('zu lang',320,190,'#e0463c','#fff',2.4),
+ P(70,{top:'#16a34a',face:'angry',cls:'L'})+shp(240)+tag('einkaufen!',130,50)+bag(100,148,.8)]],
+['Hoffentlich finde ich hier etwas!',[
+ P(70,{face:'smile',arms:'wave',cls:'L'})+shp(240)+tag('Hoffentlich!',150,60,'#fff','#222',.9),
+ P(60,{face:'smile'})+rack(150)+lens(180,70)+tag('suchen …',70,60),
+ P(70,{face:'wow',arms:'wave'})+shirt(210,70,'#f59e0b',2.2)+st(150,70,1.3)+st(280,60,1.5,'#fde047',.3)+st(310,140,1.2,'#fde047',.6)+tag('etwas gefunden!',270,190,'#22c55e','#fff')]],
+['Oh, hallo! Was machst du denn hier?',[
+ P(80,{top:'#f97316',cls:'L'}),
+ P(80,{top:'#f97316'})+W(320,{top:'#14b8a6',cls:'R'}),
+ P(80,{top:'#f97316',face:'wow'})+W(320,{top:'#14b8a6',face:'wow',arms:'wave'})+bub('Oh, hallo!',90,24,80)+bub('Was machst du hier?',255,24,320)]],
+['Das ist aber schön! Und teuer! Egal, ich kaufe es.',[
+ W(100,{face:'love',arms:'hold'})+dress(100,128,'#ec4899',.9)+st(190,60,1.5)+st(40,70,1.2,'#fde047',.4)+tag('schön!',270,110,'#22c55e','#fff'),
+ W(90,{face:'wow',arms:'hold'})+dress(90,128,'#ec4899',.9)+`<g class="pop" style="animation-delay:.3s"><line x1="260" y1="40" x2="260" y2="80" stroke="#555" stroke-width="3"/><rect x="215" y="80" width="90" height="60" rx="8" fill="#fff" stroke="#e0463c" stroke-width="4"/><text x="260" y="120" text-anchor="middle" font-size="30" font-weight="800" fill="#e0463c">€€€</text></g>`+tag('teuer!',260,175,'#e0463c','#fff',.8),
+ W(80,{face:'smile',arms:'up'})+tag('Egal!',80,45)+card(200,120,'pop')+chk(300,100)+bag(345,150,.9)]],
+['Super T-Shirt.',[
+ P(110,{top:'#ef4444',star:1,face:'love',arms:'wave',cls:'hop'})+P(310,{top:'#14b8a6',face:'smile',arms:'wave'})+bub('Super T-Shirt.',240,36,310)+st(40,60,1.4)+st(180,90,1.2,'#fde047',.4)+st(190,170,1,'#fde047',.7)]],
+['Der Rock ist zu kurz. Und die Hose ist zu eng.',[
+ W(110,{sk:1,sl:40,bot:'#e84a8a',top:'#fde68a',face:'sad'})+dV(200,174,210,'#e0463c',1.9)+tag('zu kurz',290,140,'#e0463c','#fff',1.9)+crs(300,80,2.2),
+ P(110,{pc:'strain',bw:44,face:'sad',bot:'#1e3a8a'})+`<path d="M20 175 h24 M200 175 h-24" stroke="#e0463c" stroke-width="0"/>`+dH(30,70,175,'#e0463c',.3)+dH(190,150,175,'#e0463c',.3)+tag('zu eng',290,140,'#e0463c','#fff',.8)+crs(300,80,1.1)]],
+['Ja, und du siehst auch toll aus!',[
+ P(100,{top:'#f97316',face:'love'})+W(300,{top:'#8b5cf6',face:'smile'})+bub('Du siehst toll aus!',100,30,100)+ht(250,100,1.8,.4),
+ P(100,{top:'#f97316',face:'love',cls:'hop'})+W(300,{top:'#8b5cf6',face:'love',cls:'hop'})+bub('Ja, und du siehst auch toll aus!',200,24,300)+ht(160,110,1.6)+ht(240,120,1.6,.4)+st(200,170,1.4)]]
+];
+
+const root=document.getElementById('root'),nav=document.getElementById('nav'),sc=[];let cur=0;
+nav.innerHTML=S.map((_,i)=>`<a href="#s${i}" title="${i+1}"></a>`).join('');
+S.forEach(([t,f],i)=>{
+ const sec=document.createElement('section');sec.id='s'+i;
+ sec.innerHTML=`<div class="no">${i+1} / ${S.length}</div><div class="stage"><div class="st"></div></div><div class="ctl"><button class="b prev" aria-label="zurück">‹</button><button class="b play" aria-label="Pause">❚❚</button><button class="b next" aria-label="weiter">›</button><div class="seg">${f.map(()=>'<i><u></u></i>').join('')}</div><button class="b rep" aria-label="Neustart">↻</button></div><h2>${t}</h2>`;
+ root.appendChild(sec);
+ const q=s=>sec.querySelector(s),st=q('.st'),seg=[...sec.querySelectorAll('.seg i')],pb=q('.play');
+ const o={k:0,user:false,vis:false};
+ o.apply=()=>{sec.classList.toggle('paused',o.user||!o.vis);pb.textContent=o.user?'▶':'❚❚'};
+ o.show=n=>{o.k=n;st.innerHTML=`<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMax meet"><rect y="211" width="400" height="39" style="fill:var(--fl)"/>${f[n]}</svg>`;
+  seg.forEach(e=>e.className='');void sec.offsetWidth;seg.forEach((e,j)=>e.className=j<n?'d':j==n?'on':'')};
+ o.step=d=>o.show((o.k+d+f.length)%f.length);
+ q('.seg').addEventListener('animationend',e=>{if(e.animationName=='fill')o.step(1)});
+ seg.forEach((e,j)=>e.onclick=()=>o.show(j));
+ q('.prev').onclick=()=>o.step(-1);q('.next').onclick=()=>o.step(1);
+ q('.rep').onclick=()=>{o.user=false;o.show(0);o.apply()};
+ pb.onclick=()=>{o.user=!o.user;o.apply()};
+ o.show(0);o.apply();sc.push(o);
+ new IntersectionObserver(([e])=>{const on=e.isIntersecting;if(on&&!o.vis){o.vis=true;cur=i;if(!o.user)o.show(0)}else if(!on)o.vis=false;o.apply();
+  nav.querySelectorAll('a').forEach((a,j)=>a.className=sc[j]&&sc[j].vis?'on':'')},{threshold:.6}).observe(sec);
+});
+addEventListener('keydown',e=>{const o=sc[cur];if(!o||!o.vis)return;
+ if(e.code=='Space'){e.preventDefault();o.user=!o.user;o.apply()}
+ else if(e.key=='ArrowRight')o.step(1);else if(e.key=='ArrowLeft')o.step(-1)});
+</script></body></html>
